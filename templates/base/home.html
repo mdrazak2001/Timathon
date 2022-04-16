@@ -7,5 +7,13 @@
 
 <h2>Home Page</h2>
 
+{% if request.user.is_authenticated %}
+
+<center>
+    <p>your score is {{score}}</p>
+</center>
+
+{% endif %}
+
 
 {% endblock content %}

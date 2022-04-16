@@ -5,8 +5,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Timathon</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Timathon</title>
+    {% block css  %}
+    {% endblock css %}
 </head>
 
 <body>
@@ -20,9 +29,21 @@
         </ul>
     {% endif %}
 
+    <!-- <div class="w3-sidebar w3-bar-block" style="width:15%; margin-right: 90%">
+        <a href="{% url 'day1' %}" class="w3-bar-item w3-button">Day 1</a>
+        <br>
+        <a href="#" class="w3-bar-item w3-button">Day 2</a>
+        <br>
+        <a href="#" class="w3-bar-item w3-button">Day 3</a>
+        <br>
+        <a href="#" class="w3-bar-item w3-button">Day 4</a>
+        <br>
+        <a href="#" class="w3-bar-item w3-button">Day 5</a>
+    </div> -->
+
     {% block content %}
 
-    {% endblock %}
+    {% endblock content %}
 
 </body>
 

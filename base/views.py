@@ -1,4 +1,11 @@
+from playsound import playsound
+import enchant
+import datetime
+from ast import pattern
+from tkinter import *
+import tkinter.scrolledtext as scrolledtext
 import email
+from warnings import catch_warnings
 from django.shortcuts import render
 from matplotlib.style import context
 from django.contrib.auth.models import User
@@ -7,10 +14,25 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from .forms import CustomUserCreationForm
+from .models import Score
+from django.contrib.auth.decorators import login_required
 
 
 def home(request):
     context = {}
+    name = request.user
+    if request.user.is_authenticated:
+        score = Score.objects.get(of=name)
+        temp_score = int(request.GET.get('score', 0))
+        day = int(request.GET.get('day', 0))
+        try:
+            if day == 1 and not score.day1:
+                score.day1 = True
+                score.score += temp_score
+        except:
+            pass
+        score.save()
+        context['score'] = score.score
     return render(request, 'base/home.html', context)
 
 
@@ -43,10 +65,113 @@ def registerPage(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            Score.objects.create(of=user, score=0)
             return redirect('home')
         else:
             messages.error(request, 'An Error Occured during registration')
     else:
         form = CustomUserCreationForm()
     return render(request, 'base/login_register.html', {'form': form})
+
+
+score = 0
+accepted_words = []
+
+
+@login_required(login_url='login')
+def dayone(request):
+    context = {}
+
+    done = 'false'
+    user = request.user
+    sc = Score.objects.get(of=user)
+    if sc.day1:
+        done = 'true'
+    context['done'] = done
+
+    chars = ['t', 't', 't', 'n', 'n', 'r', 'r',
+             'k', 'k', 'g', 'o', 'z', 'y', 'z', 'l']
+    context['chars'] = chars
+    context['bool'] = 'true'
+    options = []
+    if request.method == 'POST':
+        options = request.POST.getlist("select")
+        options = options[:8]
+        char_options = []
+        for o in options:
+            char_options.append(chars[int(o)])
+        char_options = ' '.join(map(str, char_options))
+        req = 'chars=' + char_options
+
+        '''Set Target Time For task'''
+        current_datetime = datetime.datetime.now()
+        hh = current_datetime.hour
+        mm = current_datetime.minute
+        ss = current_datetime.second + 90
+        req = req + '&hh=' + str(hh)
+        req = req + '&mm=' + str(mm)
+        req = req + '&ss=' + str(ss)
+        score = 0
+        accepted_words = []
+
+        return redirect('/day1game/?' + f'{req}')
+
+    return render(request, 'base/day1.html', context)
+
+
+@login_required(login_url='login')
+def day1game(request):
+    context = {}
+    ''' Get 'get' Parameters '''
+    chars = request.GET.get('chars', -1)
+    hh = int(request.GET.get('hh', -1))
+    mm = int(request.GET.get('mm', -1))
+    ss = int(request.GET.get('ss', -1))
+
+    '''Chosen Pattern Recognition of give chars'''
+    p = ''
+    for c in chars:
+        if c != ' ':
+            p += c + '*'
+    context['pattern'] = p
+    new_chars_list = chars.split()
+    context['chars'] = new_chars_list
+    new_chars_list.append("backspace")
+    new_chars_list.append("done")
+
+    '''Target Time Task Completion'''
+    context['hh'] = hh
+    context['mm'] = mm
+    context['ss'] = ss
+    global score
+    global accepted_words
+    if request.method == 'POST':
+        word = request.POST['word']
+        print(valid(word, chars))
+        if valid(word, chars):
+            score += len(word)
+            accepted_words.append(word)
+            playsound(r'static\success.wav')
+        else:
+            playsound(r'static\fail.mp3')
+        print(word)
+    context['score'] = score
+
+    return render(request, 'base/day1game.html', context)
+
+
+def valid(word, chars):
+    d = enchant.Dict("en_US")
+    for c in word:
+        ok = False
+        for l in chars:
+            if c == l:
+                ok = True
+                break
+        if not ok:
+            return False
+    for w in accepted_words:
+        if w == word:
+            return False
+    return d.check(word) and len(word) >= 3 and len(word) <= 8

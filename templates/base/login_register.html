@@ -3,7 +3,8 @@
 {% block content %}
 
 {% if page == 'login' %}
-<div>
+
+<div style="margin-left: 20%;">
     <form method="post" action="">
         {% csrf_token %}
         <label for="username">Username</label>
@@ -18,7 +19,7 @@
     <a href="{% url 'register' %}">Sign UP</a>
 </div>
 {% else %}
-<div>
+<div style="margin-left: 20%;">
     <form method="post" action="">
         {% csrf_token %}       
         {{form.as_p}}
