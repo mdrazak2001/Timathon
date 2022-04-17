@@ -64,11 +64,26 @@
 .sidebar-sticky {
   position: relative;
   top: 0;
-  height: calc(100vh - 48px);
+  height: calc(100vh - 60px);
   padding-top: 0.5rem;
   overflow-x: hidden;
   overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
 }
+
+.quote {
+  margin: 0;
+  background: #eee;
+  padding: 0.001em;
+  border-radius: 1em;
+  margin-left:30em;
+}
+.quote figcaption,
+.quote blockquote {
+  margin-left: 1em;
+  margin: 0.4em;
+}
+
+
 </style>
 
 {% endblock css %}
@@ -86,7 +101,6 @@
           <br>
             <!-- <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Main dashboard</span> -->
           </a>
-
           {% if 'day1' in request.path %}
             <a href="{% url 'day1' %}" class="list-group-item list-group-item-action py-2 ripple active">
                 <i class="fas fa-chart-area fa-fw me-3"></i><span>Day 1</span>
@@ -164,18 +178,36 @@
             loading="lazy"
           />
         </a>
-        <!-- Search form -->
-        <form class="d-none d-md-flex input-group w-auto my-auto">
-          <input
-            autocomplete="off"
-            type="search"
-            class="form-control rounded"
-            placeholder='Search (ctrl + "/" to focus)'
-            style="min-width: 225px;"
-          />
-          <span class="input-group-text border-0"><i class="fas fa-search"></i></span>
-        </form>
-  
+
+        
+        <!-- <p>Paragraph before quote.</p> -->
+
+        <figure class="quote">
+          <blockquote>
+            “Tell me and I forget, teach me and I may remember, involve me and I learn.”</blockquote>
+          <figcaption>
+            &mdash; Benjamin Franklin  </figcaption>
+        </figure>
+
+        <!-- <p>Paragraph after quote.</p> -->
+
+        <!-- <h2 style="margin-left:10% ;">“Tell me and I forget, teach me and I may remember, involve me and I learn.”</h2>   -->
+        <!-- <img src="/static/quote.png" style="height: 90px; width: 500px; margin-left: 20%;"  alt=""> -->
+        <!-- <svg viewBox="500 0 50 50" xmlns="http://www.w3.org/2000/svg">
+          <style>
+            .small { font: italic 13px sans-serif; }
+            .heavy { font: bold 30px sans-serif; }
+        
+            /* Note that the color of the text is set with the    *
+             * fill property, the color property is for HTML only */
+            .Rrrrr { font: italic 40px serif; fill: red; }
+          </style>
+        
+          <text x="20" y="35" class="small">My</text>
+          <text x="40" y="35" class="heavy">cat</text>
+          <text x="55" y="55" class="small">is</text>
+          <text x="65" y="55" class="Rrrrr">Grumpy!</text>
+        </svg> -->
         <!-- Right links -->
         <ul class="navbar-nav ms-auto d-flex flex-row">
 

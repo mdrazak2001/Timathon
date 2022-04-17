@@ -2,10 +2,178 @@
 {% load static %}
 
 
+{% block css %}
+
+<style>
+    .cards-list {
+  z-index: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.card {
+  margin: 30px auto;
+  width: 300px;
+  height: 300px;
+  border-radius: 40px;
+box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.card .card_image {
+  width: inherit;
+  height: inherit;
+  border-radius: 40px;
+}
+
+.card .card_image img {
+  width: inherit;
+  height: inherit;
+  border-radius: 40px;
+  object-fit: cover;
+}
+
+.card .card_title {
+  text-align: center;
+  border-radius: 0px 0px 40px 40px;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 30px;
+  margin-top: -80px;
+  height: 40px;
+}
+
+.card:hover {
+  transform: scale(0.9, 0.9);
+  box-shadow: 5px 5px 30px 15px rgba(0,0,0,0.25), 
+    -5px -5px 30px 15px rgba(0,0,0,0.22);
+}
+
+.title-white {
+  color: white;
+}
+
+.title-black {
+  color: black;
+}
+
+@media all and (max-width: 500px) {
+  .card-list {
+    /* On small screens, we are no longer using row direction but column */
+    flex-direction: column;
+  }
+}
+
+
+/*
+.card {
+  margin: 30px auto;
+  width: 300px;
+  height: 300px;
+  border-radius: 40px;
+  background-image: url('https://i.redd.it/b3esnz5ra34y.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-repeat: no-repeat;
+box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);
+  transition: 0.4s;
+}
+*/
+</style>
+
+{% endblock css %}
+
+
 {% block content %}
 
 <center>
-<p>HI Day2</p>
+{% if done == 'false' %}
+<p>Day2</p>
+<div class="cards-list">
+  
+    <div class="card 1">
+      <div class="card_image container"> <img src="https://i.redd.it/b3esnz5ra34y.jpg" />
+        <div class="card-img-overlay card_title title-white">
+            <p class="card-text" target={{send}} style="margin-top: 70%;">5</p>
+          </div>
+     </div>
+        <!-- <div class="card_title title-white">
+        <p>9</p>
+      </div> -->
+    </div>
+    
+    </div>
+
+    {% if score != 0  %}
+    Score = {{score}}
+    {% endif %}
+    
+    {% else %}
+      <p>You Have Completed this game , Proceed to next games!!</p>
+    {% endif %}
+
+
 </center>
+
+
+<script>
+  // console.log(typeof  {{score}});
+    if (!{{done}}) {
+      var alerted = localStorage.getItem('alerted') || '';
+      if (alerted != 'yes') {
+        alert("Day2 Rules:\nYou will be displayed Three 6 digit numbers\nNow You are to speak the numbers in the same order as they are displayed");
+        localStorage.setItem('alerted','yes');
+      }
+      // localStorage.removeItem('alerted');
+    }
+    const counter = document.querySelectorAll('.card-text');
+    const speed = 10 ;
+    counter.forEach(c => {
+        var i = 0;
+        const updateCount = () => {
+            const target = c.getAttribute('target');
+            if(target.length == 1 && target[0] == 's') {
+                window.location.href = '{% url "home" %}' + '?score={{score}}' + '&day=2';
+             }
+            if (target[i] == 's') {
+                c.innerText = 'Get Ready to Speak in'
+                i++;
+                setTimeout(updateCount, 1000)
+            }
+            else if(i < target.length) {
+                c.innerText = target[i++]
+                setTimeout(updateCount, 1000)
+            } else {
+                    c.innerText = ''
+                    var x = document.createElement("FORM");
+                    x.setAttribute("id", "myForm");
+                    x.setAttribute("method", "post");
+                    x.setAttribute("onsubmit", "clicked();");
+                    document.body.appendChild(x);
+
+                    var y = document.createElement("INPUT");
+                    y.setAttribute("type", "submit");
+                    y.setAttribute("id", "my-link");
+                    y.setAttribute("value", "Start");
+                    document.getElementById("myForm").appendChild(y);
+                    c.appendChild(x);
+
+                    var link = document.getElementById('my-link');
+                    link.click();
+            }
+        }
+        updateCount();
+    });
+
+    function clicked() {
+        updateCount();
+    }
+
+
+</script>
 
 {% endblock content %}

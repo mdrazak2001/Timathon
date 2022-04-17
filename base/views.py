@@ -29,6 +29,9 @@ def home(request):
             if day == 1 and not score.day1:
                 score.day1 = True
                 score.score += temp_score
+            if day == 2 and not score.day2:
+                score.day2 = True
+                score.score += temp_score
         except:
             pass
         score.save()

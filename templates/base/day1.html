@@ -28,6 +28,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 
 <script>
+  console.log(typeof {{done}});
+  if (!{{done}}){
+    alert("Day1 Rules\nSelect 8 letters and then try forming meaningful words out of them\nYou get points based on the Length of the words you form   ");
+  }
   if($("select").multipleSelect("getSelects").length > 3)
     {
       alert('Not allowed');
