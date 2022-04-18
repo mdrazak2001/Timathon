@@ -7,6 +7,7 @@
 
 {% if done == 'false' %}
 <center>
+  <br><br><br><br><br>
   <p>Select 8 Letters</p>
   <form method="post">
     {% csrf_token %}
@@ -21,7 +22,8 @@
 </center>
 {% else %}
 <center>
-  <p>You Have Completed this game , Proceed to next games!!</p>
+  <br><br><br><br>
+  <h2>You Have Completed this game , Proceed to next games!!</h2>
 </center>
 {% endif %}
 

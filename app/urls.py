@@ -23,6 +23,8 @@ urlpatterns = [
     path('', include('base.urls')),
     path('day2/', include('day2.urls')),
     path('day3/', include('day3.urls')),
+    path('leaderboard/', include('leaderboard.urls')),
+
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

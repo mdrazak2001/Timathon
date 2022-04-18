@@ -46,6 +46,11 @@ def day2(request):
             score += 6
         else:
             playsound(r'static\fail.mp3')
+        if(s == 's'):
+            i = 0
+            sc = score
+            score = 0
+            return redirect('/?score=' + str(sc) + '&day=2')
         context['score'] = score
         i = i + 1
         s = send[i]
