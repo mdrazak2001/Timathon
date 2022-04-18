@@ -15,6 +15,7 @@ import sounddevice as sd
 from django.views.decorators.csrf import csrf_exempt
 import speech_recognition as sr
 import re
+from django.contrib.auth.decorators import login_required
 
 send = ["521634s321", "918342s321", "241425s321", 's', ""]
 i = 0
@@ -22,6 +23,7 @@ score = 0
 
 
 @csrf_exempt
+@login_required(login_url='login')
 def day2(request):
     context = {}
     global i

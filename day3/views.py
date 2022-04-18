@@ -6,10 +6,11 @@ from base.models import *
 from PIL import ImageChops, Image
 import numpy as np
 import matplotlib.pyplot as plt
-
+from django.contrib.auth.decorators import login_required
 score = 0
 
 
+@login_required(login_url='login')
 def day3(request):
     context = {}
     user = request.user

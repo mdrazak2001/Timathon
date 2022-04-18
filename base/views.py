@@ -69,13 +69,38 @@ def logoutUser(request):
 
 def registerPage(request):
     if request.method == 'POST':
-        form = CustomUserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            Score.objects.create(of=user, score=0)
-            return redirect('home')
+        # form = CustomUserCreationForm(request.POST)
+        # if form.is_valid():
+        #     user = form.save()
+        #     Score.objects.create(of=user, score=0)
+        #     return redirect('home')
+        # else:
+        #     messages.error(request, 'An Error Occured during registration')
+        username = request.POST['username']
+        mail = request.POST['email']
+        p1 = request.POST['password1']
+        p2 = request.POST['password2']
+        print(p1, p2)
+        if(p1 == p2):
+            if User.objects.filter(email=email).first() is not None:
+                messages.add_message(
+                    request, messages.INFO, 'email name taken')
+                render(request, 'base/login_register.html')
+            elif User.objects.filter(username=username).first() is not None:
+                messages.add_message(
+                    request, messages.INFO, 'User name taken')
+                render(request, 'base/login_register.html')
+            else:
+                user_ob = User.objects.create(
+                    username=username, email=mail)
+                user_ob.set_password(p1)
+                Score.objects.create(of=user_ob, score=0)
+                user_ob.save()
+            return redirect('login')
         else:
-            messages.error(request, 'An Error Occured during registration')
+            messages.add_message(
+                request, messages.INFO, 'Passwords Dont Match')
+
     else:
         form = CustomUserCreationForm()
     return render(request, 'base/login_register.html', {'form': form})
