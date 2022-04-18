@@ -7,6 +7,7 @@ class Score(models.Model):
     score = models.IntegerField(default=0, blank=False)
     day1 = models.BooleanField(default=False)
     day2 = models.BooleanField(default=False)
+    day3 = models.BooleanField(default=False)
 
     def __str__(self):
         return self.of.username
