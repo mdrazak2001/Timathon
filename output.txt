@@ -1,7 +1,8 @@
-expected an indented block after function definition on line 1 (<string>, line 2)
-0
-0
-say...
-1133
-say...
-1111
+name 'rett' is not defined
+['True', 'False']
+shiv
+19.8
+razak_123
+19.8
+shiv
+19.8

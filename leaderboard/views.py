@@ -55,7 +55,8 @@ def analysis(request):
         tasks = 100
     users = User.objects.all()
     tot = 0
-
+    print(tasks)
+    context['tasks'] = tasks
     for u in users:
         score = Score.objects.get(of=u)
         # order.append((u.username, score.score))
@@ -82,5 +83,4 @@ def analysis(request):
     # user = request.user
     # score = Score.objects.get(of=user)
     context['strin'] = strin
-    context['tasks'] = tasks
     return render(request, 'leaderboard/analysis.html', context)
