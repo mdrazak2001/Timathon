@@ -1,0 +1,19 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<br>
+<br>
+
+<h2>Home Page</h2>
+
+{% if request.user.is_authenticated %}
+
+<center>
+    <h1>Your score is {{score}}</h1>
+</center>
+
+{% endif %}
+
+
+{% endblock content %}

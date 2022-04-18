@@ -1,0 +1,78 @@
+{% extends 'main.html' %}
+{% load static %}
+
+
+{% block css %}
+
+<style>
+.article--viewer_content .a-wrapper .content .text pre {
+    padding: 20px;
+    background-color: var(--gfg-grey-bg);
+    color: var(--color-black);
+    font-size: 12pt;
+    overflow: auto;
+    white-space: pre;
+}
+.vl {
+  border-left: 2px solid green;
+  height: 700px;
+  position: absolute;
+  left: 50%;
+  margin-left: 380px;
+  top: 0;
+}
+</style>
+
+{% endblock css %}
+
+
+{% block content %}
+
+<center>
+
+  <div class="row justify-content-md-center">
+    <div class="col" style="background-color: aqua;" >
+      <h3 style="margin-left:300px ; text-size-adjust: 20px; font-weight: normal;">Given a string, write a python function to check if it is palindrome or not. A string is said to be palindrome if the reverse of the string is the same as string. For example, “radar” is a palindrome, but “radix” is not a palindrome.You don't need to read input or print anything. Complete the function <strong>solve()</strong> which takes a string word </p>      
+        <br>       
+        Examples:
+        <h4  style="margin-left:300px ;"><strong>Input :</strong> malayalam <br>
+  <strong>Output :</strong> True
+        <br> <br>
+              <strong>Input :</strong> geeks <br>
+              <strong>Output : </strong>False</h2>
+              <br>
+            <h5 style="margin-left:300px ;">NOTE OUTPUT FORMAT : return 'True' if the word is a palindrome else 'False'</h5>
+
+
+    </div>
+
+
+    <div class="col" style="background-color: orchid; margin-right: 5%;">
+      <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="codearea">Code Area</label>
+          <textarea class="form-control" id="codearea" name="codearea" rows="10" >{{code}} </textarea>
+        </div>
+        <div class="form-group">
+          <label for="output">Output</label>
+
+          <textarea class="form-control" id="output" name="output" rows="7" disabled>Test1: {{t1}} Test2: {{t2}} &#10;&#10;{{output}}
+          </textarea>
+        </div>
+        <br>
+        <button type="submit" name="tests">Run Tests</button>
+        <button type="submit" name="submit" >Submit</button>
+      </form>
+      <br> <br>
+    </div>
+
+  </div>
+</center>
+
+
+<script>
+
+</script>
+
+{% endblock content %}
