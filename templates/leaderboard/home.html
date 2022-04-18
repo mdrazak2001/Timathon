@@ -1,0 +1,58 @@
+{% extends 'main.html' %}
+{% load static %}
+
+
+{% block css %}
+
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 70%;
+  margin-left: 10%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+
+{% endblock css %}
+
+
+{% block content %}
+
+<center>
+    
+    <h1>LeaderBoard</h1>
+    <table>
+        <tr>
+            <th style="width:5%">Srno.</th>
+          <th>Username</th>
+          <th>Score</th>
+        </tr>
+        {% for n,s in order %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+          <td>{{n}}</td>
+          <td>{{s}}</td>
+        </tr>
+        {% endfor %}
+      </table>
+      
+
+</center>
+
+
+<script>
+
+</script>
+
+{% endblock content %}

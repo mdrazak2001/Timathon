@@ -1,5 +1,7 @@
-name 're' is not defined
+expected an indented block after function definition on line 1 (<string>, line 2)
+0
 0
 say...
-hello how are you I am doing fine
-0
+1133
+say...
+1111

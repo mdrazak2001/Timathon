@@ -121,8 +121,8 @@ def dayone(request):
         done = 'true'
     context['done'] = done
 
-    chars = ['t', 't', 't', 'n', 'n', 'r', 'r',
-             'k', 'k', 'g', 'o', 'z', 'y', 'z', 'l']
+    chars = ['e', 't', 'a', 'i', 'n', 'o', 's',
+             'h', 'r', 'd', 'l', 'u', 'c', 'm', 'f', 'p']
     context['chars'] = chars
     context['bool'] = 'true'
     options = []

@@ -1,13 +1,4 @@
 
-<center><a href="/"><h1>Hello World</h1></center></a>
-
-
-{% if request.user.is_authenticated %}
-    <p>Hello {{request.user}}</p>
-    <a href="{% url 'logout' %}">LOGOUT</a>
-{% else %}
-    <a href="{% url 'login' %}">LOGIN</a>
-{% endif %}
 {% block css %}
 <!-- Font Awesome -->
 <link
@@ -131,27 +122,26 @@
           >
           {% endif %}  
 
-          <a href="#" class="list-group-item list-group-item-action py-2 ripple">
-            <i class="fas fa-chart-pie fa-fw me-3"></i><span>Day 4</span>
-          </a>
-          <a href="#" class="list-group-item list-group-item-action py-2 ripple"
-            ><i class="fas fa-chart-bar fa-fw me-3"></i><span>Day 5</span></a
-          >
-          <a href="#" class="list-group-item list-group-item-action py-2 ripple"
+          {% if 'leaderboard' in request.path and 'analysis' not in request.path %}
+          <a href="{% url 'leaderboard' %}" class="list-group-item list-group-item-action py-2 ripple active"
             ><i class="fas fa-users fa-fw me-3"></i><span>Leaderboard</span></a
           >
-          <a href="#" class="list-group-item list-group-item-action py-2 ripple"
+          {% else %}
+          <a href="{% url 'leaderboard' %}" class="list-group-item list-group-item-action py-2 ripple"
+            ><i class="fas fa-users fa-fw me-3"></i><span>Leaderboard</span></a
+          >
+          {% endif %}
+
+
+          {% if 'analysis' in request.path %}
+          <a href="{% url 'analysis' %}" class="list-group-item list-group-item-action py-2 ripple active"
             ><i class="fas fa-chart-line fa-fw me-3"></i><span>Analysis</span></a
           >
-          <a href="#" class="list-group-item list-group-item-action py-2 ripple"
-            ><i class="fas fa-calendar fa-fw me-3"></i><span>Calendar</span></a
+          {% else %}
+          <a href="{% url 'analysis' %}" class="list-group-item list-group-item-action py-2 ripple"
+            ><i class="fas fa-chart-line fa-fw me-3"></i><span>Analysis</span></a
           >
-          <a href="#" class="list-group-item list-group-item-action py-2 ripple"
-            ><i class="fas fa-users fa-fw me-3"></i><span>Users</span></a
-          >
-          <a href="#" class="list-group-item list-group-item-action py-2 ripple"
-            ><i class="fas fa-money-bill fa-fw me-3"></i><span>Sales</span></a
-          >
+          {% endif %}
         </div>
       </div>
     </nav>
@@ -247,12 +237,6 @@
               class="dropdown-menu dropdown-menu-end"
               aria-labelledby="navbarDropdownMenuLink"
             >
-              <li>
-                <a class="dropdown-item" href="#">My profile</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#">Settings</a>
-              </li>
               <li>
                 <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
               </li>

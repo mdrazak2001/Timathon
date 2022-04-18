@@ -1,2 +1,1 @@
-def solve(word) :
- re  
+def solve(word):      return
