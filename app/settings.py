@@ -30,6 +30,11 @@ ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
     'involveio.herokuapp.com',
+    '55fa-27-7-96-252.ngrok.io',
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://55fa-27-7-96-252.ngrok.io'
 ]
 
 

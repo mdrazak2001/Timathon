@@ -122,12 +122,6 @@
           >
           {% endif %}  
 
-          <a href="#" class="list-group-item list-group-item-action py-2 ripple">
-            <i class="fas fa-chart-pie fa-fw me-3"></i><span>Day 4</span>
-          </a>
-          <a href="#" class="list-group-item list-group-item-action py-2 ripple"
-            ><i class="fas fa-chart-bar fa-fw me-3"></i><span>Day 5</span></a
-          >
           {% if 'leaderboard' in request.path and 'analysis' not in request.path %}
           <a href="{% url 'leaderboard' %}" class="list-group-item list-group-item-action py-2 ripple active"
             ><i class="fas fa-users fa-fw me-3"></i><span>Leaderboard</span></a
@@ -148,16 +142,6 @@
             ><i class="fas fa-chart-line fa-fw me-3"></i><span>Analysis</span></a
           >
           {% endif %}
-
-          <a href="#" class="list-group-item list-group-item-action py-2 ripple"
-            ><i class="fas fa-calendar fa-fw me-3"></i><span>Calendar</span></a
-          >
-          <a href="#" class="list-group-item list-group-item-action py-2 ripple"
-            ><i class="fas fa-users fa-fw me-3"></i><span>Users</span></a
-          >
-          <a href="#" class="list-group-item list-group-item-action py-2 ripple"
-            ><i class="fas fa-money-bill fa-fw me-3"></i><span>Sales</span></a
-          >
         </div>
       </div>
     </nav>
