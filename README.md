@@ -13,7 +13,7 @@ pip install -r requirements.txt
 ```
 
 ## Frameworks Used
-The Project was made using a Django Backed and Tailwind CSS as the UI.
+The Project was made using a Django Backend and Tailwind CSS as the UI.
 
 To start the project locally :
 ```
